@@ -27,13 +27,16 @@ jobs:
           create_credentials_file: true
           token_format: 'access_token'
           workload_identity_provider: 'projects/362698614209/locations/global/workloadIdentityPools/org-wif-prod-ghe/providers/gh-provider'
-          service_account: 'cap-wf-prod-prod-sa-tst@cap-prod-tst-fdc7.iam.gserviceaccount.com'
+          project_id: 'cap-prod-tst-fdc7'
           
       - name: 'Set Project'
         run: gcloud config set project cap-prod-tst-fdc7
 
       - name: 'List all buckets'
         run : gcloud storage ls
+
+
+      
 
       
 
