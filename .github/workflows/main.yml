@@ -1,0 +1,39 @@
+# TFC
+name: Actions WIF Demo
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  GitHub-Actions-on-GKE:
+    runs-on: ghe-runner-scale-set-bootstrap
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: 'Git repo checkout'
+        uses: actions/checkout@v4
+        
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          create_credentials_file: true
+          token_format: 'access_token'
+          workload_identity_provider: 'projects/362698614209/locations/global/workloadIdentityPools/org-wif-prod-ghe/providers/gh-provider'
+          service_account: 'cap-wf-prod-prod-sa-tst@cap-prod-tst-fdc7.iam.gserviceaccount.com'
+          
+      - name: 'List objects - prj 1'
+        run: gcloud storage ls gs://dataflow-staging-us-central1-1000025393506/staging/template_launches
+
+      - name: 'List objects - prj 2'
+        run: gcloud storage ls gs://gcs-cache-ttl-test-456/
+
+
+      
