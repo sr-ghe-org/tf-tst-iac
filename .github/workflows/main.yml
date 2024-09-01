@@ -29,11 +29,13 @@ jobs:
           workload_identity_provider: 'projects/362698614209/locations/global/workloadIdentityPools/org-wif-prod-ghe/providers/gh-provider'
           service_account: 'cap-wf-prod-prod-sa-tst@cap-prod-tst-fdc7.iam.gserviceaccount.com'
           
-      - name: 'List objects - prj 1'
-        run: gcloud storage ls gs://dataflow-staging-us-central1-1000025393506/staging/template_launches
+      - name: 'Set Project'
+        run: gcloud config set project cap-prod-tst-fdc7
 
-      - name: 'List objects - prj 2'
-        run: gcloud storage ls gs://gcs-cache-ttl-test-456/
+      - name: 'List all buckets'
+        run : gcloud storage ls
+
+      
 
 
       
