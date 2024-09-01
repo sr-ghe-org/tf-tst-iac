@@ -32,8 +32,8 @@ jobs:
       - name: 'Set Project'
         run: gcloud config set project cap-prod-tst-fdc7
 
-      - name: 'List all buckets'
-        run : gcloud storage ls
+      # - name: 'List all buckets'
+      #   run : gcloud storage ls
 
 
       
